@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #FFFFFF;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+}
+
+header {
+  background: #F5F5F5;
+  width: 100%;
+  padding: 50px;
+}
+
+.title-container {
+}
+
+.title {
+  margin: 0;
+}
+
+.slogan {
+  margin-top: 10px;
+}
+
+.services-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.service {
+  margin: 0 .5rem;
+}
+
+.rendered-items-container {}
+
+.get-invoice {
+  margin: 2rem;
+}
