@@ -1,14 +1,22 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Item from "./Item"
 
 export default function Body() {
     const [total, setTotal] = useState(0)
+    const [cart, setCart] = useState([])
     const [formData, setFormData] = useState(
         {
             service: "",
             price: ""
         }
     )
+    const [storageData, setStorageData] = useState(
+        () => JSON.parse(localStorage.getItem("formInput")) || []
+    )
+    
+    useEffect(() => {
+        localStorage.setItem("formInput", JSON.stringify(formData))
+    }, [formData])
 
     function handleChange(e) {
         const {name, value} = e.target
@@ -20,60 +28,13 @@ export default function Body() {
         })
     }
 
-    function handleClick() {
-        console.log(formData)
-        const {name, value} = e.target
-        setFormData(prevFormData => {
-            return {
-                ...prevFormData,
-                [name]: value
-            }
-        })
+    function handleClick(e) {
+        e.preventDefault()
+        console.log(storageData)
     }
-    // console.log(services)
 
-    // function handleClick(e) {
-    //     let price = JSON.parse(e.target.value)
-    //     let serviceName = e.target.name
-    //     setTotal(prevTotal => prevTotal += price)
-
-    //     if(!services.includes(serviceName)) {
-    //         setServices(prevServices => [...prevServices, serviceName])
-    //     }
-        
-    // }
-
-    // const serviceItem =
-    // <h1>{services[0]}</h1>
     return (
         <main>
-            {/* <div className="services-container">
-                <button
-                    className="service"
-                    value="100"
-                    name="deep clean"
-                    onClick={handleClick}
-                >
-                    Deep Clean: $100
-                </button>
-                <button
-                    className="service"
-                    value="75"
-                    name="maintaince clean"
-                    onClick={handleClick}
-                >
-                    Maintaince Clean: $75
-                </button>
-                <button
-                    className="service"
-                    value="125"
-                    name="carpet clean"
-                    onClick={handleClick}
-                >
-                    Carpet Cleaning: $125
-                </button>
-            </div> */}
-
             <div className="services-container">
                 <input
                     type="text"
@@ -110,10 +71,13 @@ export default function Body() {
                     <p>Task</p>
                     <p>Total</p>
                 </div>
-                <Item
-                    service={formData.service}
-                    price={formData.price}
-                />  
+                {formData.isShown ?
+                    <Item
+                        service={formData.service}
+                        price={formData.price}
+                    /> :
+                    ""
+                }  
             </div>
 
              <button
