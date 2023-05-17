@@ -11,7 +11,7 @@ body {
 }
 
 header {
-  background: #3A69D2;
+  background: #F5F5F5;
   width: 100%;
   padding: 50px;
 }
@@ -19,12 +19,13 @@ header {
 .title {
   margin: 0;
   font-weight: 800;
-  color: #FFFFFF;
+  color: black;
+  font-size: 2.5rem;
 }
 
 .slogan {
   margin: .5rem 0 1.5rem 0;
-  color: #FFFFFF;
+  color: black;
 }
 
 .services-container {
@@ -74,6 +75,8 @@ select {
   width: 85%;
   margin: 0 auto;
   max-width: 550px;
+  border-bottom: 1px solid #C3C6DB;
+  padding-bottom: 2rem;
 }
 
 .rendered-title-container {
@@ -82,14 +85,13 @@ select {
   margin: 2.7rem 0 1rem 0;
 }
 
-.rendered-title-container>p {
+.rendered-title-container>p,
+.rendered-total-title-container>p {
   margin: 0;
 }
 
 .item-to-be-rendered {
   display: flex;
-  border-bottom: 1px solid #C3C6DB;
-  padding-bottom: 2rem;
 }
 
 .item-title {
@@ -107,6 +109,20 @@ select {
 
 .item-price {
   margin: 0 0 0 auto;
+  font-size: 1.5rem;
+}
+
+.rendered-total-container {
+  width: 85%;
+  margin: 0 auto;
+  max-width: 550px;
+  padding-bottom: 2rem;
+}
+
+.rendered-total-title-container {
+  display: flex;
+  justify-content: space-between;
+  margin: .7rem 0 1rem 0;
 }
 
 .get-invoice {

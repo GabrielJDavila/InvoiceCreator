@@ -2,21 +2,17 @@ import { useState, useEffect } from "react"
 import Item from "./Item"
 
 export default function Body() {
-    const [total, setTotal] = useState(0)
-    const [cart, setCart] = useState([])
-    const [formData, setFormData] = useState(
-        {
-            service: "",
-            price: ""
-        }
-    )
-    const [storageData, setStorageData] = useState(
-        () => JSON.parse(localStorage.getItem("formInput")) || []
-    )
-    
-    useEffect(() => {
-        localStorage.setItem("formInput", JSON.stringify(formData))
-    }, [formData])
+    const [formData, setFormData] = useState({
+        service: "",
+        price: ""
+    })
+    const [inputArr, setInputArr] = useState([])
+    const [total, setTotal] = useState("")
+
+    const renderedTotal = inputArr.map(item => {
+        let totalPrice = item.price
+        setTotal(prevTotal => prevTotal += totalPrice)
+    })
 
     function handleChange(e) {
         const {name, value} = e.target
@@ -28,9 +24,31 @@ export default function Body() {
         })
     }
 
-    function handleClick(e) {
-        e.preventDefault()
-        console.log(storageData)
+    const renderedItems = inputArr.map(item => {
+        let counterId
+        for(let i = 0; inputArr.length > i; i++) {
+            counterId = i
+        }
+        return (
+            <Item
+                key={counterId}
+                service={item.service}
+                price={item.price} 
+            />
+        )
+    })
+
+    console.log(inputArr)
+    function handleClick(inputData) {
+        const newObj = inputData
+        setInputArr(prevInputArr => [newObj, ...prevInputArr])
+        setFormData(prevFormData => {
+            return {
+                ...prevFormData,
+                service: "",
+                price: "" 
+            }
+        })
     }
 
     return (
@@ -59,7 +77,7 @@ export default function Body() {
                 </select>
 
                 <button
-                    onClick={handleClick}
+                    onClick={() => handleClick(formData)}
                     className="service-btn"
                 >
                     <img src="./src/assets/plus.png"></img>
@@ -68,16 +86,18 @@ export default function Body() {
 
             <div className="rendered-items-container">
                  <div className="rendered-title-container">
-                    <p>Task</p>
-                    <p>Total</p>
+                    <p>TASK</p>
+                    <p>TOTAL</p>
                 </div>
-                {formData.isShown ?
-                    <Item
-                        service={formData.service}
-                        price={formData.price}
-                    /> :
-                    ""
-                }  
+                {renderedItems}
+            </div>
+            
+            <div className="rendered-total-container">
+                <div className="rendered-total-title-container">
+                    <p>NOTES</p>
+                    <p>We accept cash, credit card, or PayPal</p>
+                </div>
+                {total}
             </div>
 
              <button
