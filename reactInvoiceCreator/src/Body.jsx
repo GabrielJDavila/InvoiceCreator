@@ -1,18 +1,23 @@
 import { useState, useEffect } from "react"
 import Item from "./Item"
+import Total from "./Total"
 
 export default function Body() {
+    const [inputArr, setInputArr] = useState([])
+    const [keyId, setKeyId] = useState(0)
+    const [total, setTotal] = useState(0)
     const [formData, setFormData] = useState({
         service: "",
         price: ""
     })
-    const [inputArr, setInputArr] = useState([])
-    const [total, setTotal] = useState("")
-
-    const renderedTotal = inputArr.map(item => {
-        let totalPrice = item.price
-        setTotal(prevTotal => prevTotal += totalPrice)
-    })
+    
+    useEffect(() => {
+        inputArr.map(item => {
+            return (
+                parseFloat(item.price)
+            )
+        })
+    }, [total])
 
     function handleChange(e) {
         const {name, value} = e.target
@@ -25,20 +30,16 @@ export default function Body() {
     }
 
     const renderedItems = inputArr.map(item => {
-        let counterId
-        for(let i = 0; inputArr.length > i; i++) {
-            counterId = i
-        }
+        setKeyId(prevId => prevId + 1)
         return (
             <Item
-                key={counterId}
+                key={keyId}
                 service={item.service}
                 price={item.price} 
             />
         )
     })
 
-    console.log(inputArr)
     function handleClick(inputData) {
         const newObj = inputData
         setInputArr(prevInputArr => [newObj, ...prevInputArr])
@@ -49,6 +50,7 @@ export default function Body() {
                 price: "" 
             }
         })
+        setTotal(prevTotal => prevTotal + parseFloat(formData.price))
     }
 
     return (
@@ -97,7 +99,9 @@ export default function Body() {
                     <p>NOTES</p>
                     <p>We accept cash, credit card, or PayPal</p>
                 </div>
-                {total}
+                <Total
+                    totalAmnt={total}
+                />
             </div>
 
              <button

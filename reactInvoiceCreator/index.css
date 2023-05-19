@@ -113,6 +113,7 @@ select {
 }
 
 .rendered-total-container {
+  display: flex;
   width: 85%;
   margin: 0 auto;
   max-width: 550px;
@@ -121,6 +122,8 @@ select {
 
 .rendered-total-title-container {
   display: flex;
+  flex-direction: column;
+  text-align: left;
   justify-content: space-between;
   margin: .7rem 0 1rem 0;
 }
@@ -139,4 +142,13 @@ select {
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   max-width: 550px;
+}
+
+.totals-container {
+  text-align: right;
+}
+
+.totals-container>h2 {
+  font-size: 32px;
+  margin: 0;
 }
