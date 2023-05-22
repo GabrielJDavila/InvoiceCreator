@@ -114,6 +114,7 @@ select {
 
 .rendered-total-container {
   display: flex;
+  justify-content: space-between;
   width: 85%;
   margin: 0 auto;
   max-width: 550px;

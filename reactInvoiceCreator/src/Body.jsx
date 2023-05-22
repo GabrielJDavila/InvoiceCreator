@@ -11,14 +11,19 @@ export default function Body() {
         price: ""
     })
     
+    // useEffect(() => {
+    //     inputArr.map(item => {
+    //         return (
+    //             parseFloat(item.price)
+    //         )
+    //     })
+    // }, [total])
     useEffect(() => {
-        inputArr.map(item => {
-            return (
-                parseFloat(item.price)
-            )
-        })
-    }, [total])
-
+        const totalPrice = inputArr.reduce((acc, item) => acc + parseFloat(item.price), 0);
+        setTotal(totalPrice);
+    }, [inputArr]);
+      
+    
     function handleChange(e) {
         const {name, value} = e.target
         setFormData(prevFormData => {
@@ -29,18 +34,31 @@ export default function Body() {
         })
     }
 
-    const renderedItems = inputArr.map(item => {
-        setKeyId(prevId => prevId + 1)
-        return (
-            <Item
-                key={keyId}
-                service={item.service}
-                price={item.price} 
-            />
-        )
-    })
+    const renderedItems = inputArr.map((item, index) => (
+        <Item
+            key={index}
+            service={item.service}
+            price={item.price}
+        />
+    ));
+      
+    // const renderedItems = inputArr.map(item => {
+    //     setKeyId(prevId => prevId + 1)
+    //     return (
+    //         <Item
+    //             key={keyId}
+    //             service={item.service}
+    //             price={item.price} 
+    //         />
+    //     )
+    // })
 
+    
     function handleClick(inputData) {
+        if(inputData.service.trim() === "" || inputData.price.trim() === "") {
+            alert("please fill out the inputs")
+            return;
+        }
         const newObj = inputData
         setInputArr(prevInputArr => [newObj, ...prevInputArr])
         setFormData(prevFormData => {
