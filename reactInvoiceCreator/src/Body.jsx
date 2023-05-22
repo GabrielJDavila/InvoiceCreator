@@ -4,20 +4,12 @@ import Total from "./Total"
 
 export default function Body() {
     const [inputArr, setInputArr] = useState([])
-    const [keyId, setKeyId] = useState(0)
     const [total, setTotal] = useState(0)
     const [formData, setFormData] = useState({
         service: "",
         price: ""
     })
     
-    // useEffect(() => {
-    //     inputArr.map(item => {
-    //         return (
-    //             parseFloat(item.price)
-    //         )
-    //     })
-    // }, [total])
     useEffect(() => {
         const totalPrice = inputArr.reduce((acc, item) => acc + parseFloat(item.price), 0);
         setTotal(totalPrice);
@@ -34,26 +26,20 @@ export default function Body() {
         })
     }
 
+    function removeItem(index) {
+        const newArr = inputArr.filter((_, i) => i !== index)
+        setInputArr(newArr) 
+    }
+
     const renderedItems = inputArr.map((item, index) => (
         <Item
             key={index}
             service={item.service}
             price={item.price}
+            removeItem={() => removeItem(index)}
         />
     ));
-      
-    // const renderedItems = inputArr.map(item => {
-    //     setKeyId(prevId => prevId + 1)
-    //     return (
-    //         <Item
-    //             key={keyId}
-    //             service={item.service}
-    //             price={item.price} 
-    //         />
-    //     )
-    // })
-
-    
+   
     function handleClick(inputData) {
         if(inputData.service.trim() === "" || inputData.price.trim() === "") {
             alert("please fill out the inputs")
@@ -94,6 +80,11 @@ export default function Body() {
                     <option className="menu-item" value="10">$10</option>
                     <option className="menu-item" value="20">$20</option>
                     <option className="menu-item" value="30">$30</option>
+                    <option className="menu-item" value="30">$40</option>
+                    <option className="menu-item" value="30">$50</option>
+                    <option className="menu-item" value="30">$60</option>
+                    <option className="menu-item" value="30">$70</option>
+                    <option className="menu-item" value="30">$80</option>
                 </select>
 
                 <button

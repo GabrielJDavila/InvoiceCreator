@@ -67,6 +67,17 @@ select {
   border-radius: 0px 7px 7px 0px;
 }
 
+.service-btn:hover {
+  transform: scale(1.1);
+  transition: all .5s ease;
+}
+
+.service-btn:active {
+  transform: scale(1.1);
+  transition: all .5s ease;
+  cursor: pointer;
+}
+
 .service {
   margin: 0 .5rem;
 }
@@ -105,6 +116,15 @@ select {
   background: #FFFFFF;
   margin-left: .9rem;
   padding: .5rem 0;
+  color: grey;
+  font-style: italic;
+}
+
+.remove-btn:hover {
+  color: black;
+  font-size: 15px;
+  cursor: pointer;
+  border-bottom: 2px solid #3770ED;
 }
 
 .item-price {
@@ -143,6 +163,12 @@ select {
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   max-width: 550px;
+}
+
+.get-invoice:hover {
+  transform: scale(1.1);
+  transition: all .5s ease;
+  cursor: pointer;
 }
 
 .totals-container {
