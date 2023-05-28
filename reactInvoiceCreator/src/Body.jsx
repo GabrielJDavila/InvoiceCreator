@@ -57,6 +57,10 @@ export default function Body() {
         setTotal(prevTotal => prevTotal + parseFloat(formData.price))
     }
 
+    function print() {
+        window.print()
+    }
+
     return (
         <main>
             <div className="services-container">
@@ -115,6 +119,7 @@ export default function Body() {
 
              <button
                 className="get-invoice"
+                onClick={print}
              >
                 Send Invoice
             </button>
