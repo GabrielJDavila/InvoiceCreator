@@ -95,7 +95,7 @@ export default function Body() {
                     onClick={() => handleClick(formData)}
                     className="service-btn"
                 >
-                    <img src="./dist/plus.png"></img>
+                    <img src="./plus.png"></img>
                 </button>
             </div>
 
