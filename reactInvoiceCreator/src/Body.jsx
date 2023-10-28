@@ -5,16 +5,26 @@ import Total from "./Total"
 export default function Body() {
     const [inputArr, setInputArr] = useState([])
     const [total, setTotal] = useState(0)
+    const [hide, setHide] = useState(false)
     const [formData, setFormData] = useState({
         service: "",
-        price: ""
+        price: "",
+        hours: "",
+        issuedToName: "",
+        issuedToEmail: "",
+        issuedToAddress: "",
+        issuedToPhone: "",
+        payableToName: "M&G Clean Pros LLC",
+        payableToEmail: "mgcleanpros@gmail.com",
+        payableToAddress: "83 S Lasalle St, Apt 1",
+        payableToPhone: "630-864-0607"
+
     })
     
     useEffect(() => {
         const totalPrice = inputArr.reduce((acc, item) => acc + parseFloat(item.price), 0);
         setTotal(totalPrice);
     }, [inputArr]);
-      
     
     function handleChange(e) {
         const {name, value} = e.target
@@ -35,26 +45,36 @@ export default function Body() {
         <Item
             key={index}
             service={item.service}
+            hours={item.hours}
             price={item.price}
+            issuedName={item.issuedToName}
+            issuedEmail={item.issuedToEmail}
+            issuedAddress={item.issuedToAddress}
             removeItem={() => removeItem(index)}
         />
     ));
    
-    function handleClick(inputData) {
-        if(inputData.service.trim() === "" || inputData.price.trim() === "") {
-            alert("please fill out the inputs")
-            return;
-        }
-        const newObj = inputData
+    function handleClick(e) {
+        e.preventDefault()
+        const newObj = formData
         setInputArr(prevInputArr => [newObj, ...prevInputArr])
         setFormData(prevFormData => {
             return {
                 ...prevFormData,
                 service: "",
-                price: "" 
+                price: "",
+                hours: "",
+                issuedToName: "",
+                issuedToEmail: "",
+                issuedToAddress: "",
+                issuedToPhone: ""
             }
         })
         setTotal(prevTotal => prevTotal + parseFloat(formData.price))
+    }
+
+    function changeHide() {
+        setHide(prev => !prev)
     }
 
     function print() {
@@ -63,7 +83,8 @@ export default function Body() {
 
     return (
         <main>
-            <div className="services-container">
+            {!hide &&
+            <form onSubmit={handleClick} className="services-container">
                 <input
                     type="text"
                     value={formData.service}
@@ -71,39 +92,72 @@ export default function Body() {
                     onChange={handleChange}
                     className="input-task"
                     placeholder="Enter Service"
+                    required
                 />
 
-                <select
+                <input
                     id="price"
+                    type="text"
                     value={formData.price}
                     name="price"
                     onChange={handleChange}
                     className="select-menu"
-                >
-                    <option className="menu-item" value="">-- Choose Price --</option>
-                    <option className="menu-item" value="10">$10</option>
-                    <option className="menu-item" value="20">$20</option>
-                    <option className="menu-item" value="30">$30</option>
-                    <option className="menu-item" value="30">$40</option>
-                    <option className="menu-item" value="30">$50</option>
-                    <option className="menu-item" value="30">$60</option>
-                    <option className="menu-item" value="30">$70</option>
-                    <option className="menu-item" value="30">$80</option>
-                </select>
+                    placeholder="price"
+                    required
+                />
 
-                <button
-                    onClick={() => handleClick(formData)}
-                    className="service-btn"
-                >
-                    <img src="./plus.png"></img>
+                <input
+                    type="text"
+                    value={formData.hours}
+                    name="hours"
+                    onChange={handleChange}
+                    className="input-task"
+                    placeholder="hours"
+                    required
+                />
+                
+                <input
+                    type="text"
+                    value={formData.issuedToName}
+                    name="issuedToName"
+                    onChange={handleChange}
+                    className="input-task"
+                    placeholder="payee name"
+                />
+
+                <input
+                    type="text"
+                    value={formData.issuedToEmail}
+                    name="issuedToEmail"
+                    onChange={handleChange}
+                    className="input-task"
+                    placeholder="payee email"
+                />
+
+                <input
+                    type="text"
+                    value={formData.issuedToAddress}
+                    name="issuedToAddress"
+                    onChange={handleChange}
+                    className="input-task"
+                    placeholder="payee address"
+                />
+
+                <input
+                    type="text"
+                    value={formData.issuedToPhone}
+                    name="issuedToPhone"
+                    onChange={handleChange}
+                    className="input-task"
+                    placeholder="payee phone"
+                />
+
+                <button className="service-btn">
+                    Add to invoice
                 </button>
-            </div>
+            </form>}
 
             <div className="rendered-items-container">
-                 <div className="rendered-title-container">
-                    <p>TASK</p>
-                    <p>TOTAL</p>
-                </div>
                 {renderedItems}
             </div>
             
@@ -117,12 +171,8 @@ export default function Body() {
                 />
             </div>
 
-             <button
-                className="get-invoice"
-                onClick={print}
-             >
-                Send Invoice
-            </button>
+            {!hide && <button className="get-invoice" onClick={changeHide}>Finalize Invoice</button>}
+            {hide && <button className="get-invoice" onClick={print}>Print Invoice</button>}
         </main>
     )
 }

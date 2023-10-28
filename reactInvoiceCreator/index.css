@@ -11,9 +11,18 @@ body {
 }
 
 header {
+  display: flex;
   background: #F5F5F5;
   width: 100%;
-  padding: 50px;
+  padding: 1.5rem;
+  text-align: left;
+}
+
+main {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
 .title {
@@ -30,29 +39,23 @@ header {
 
 .services-container {
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  margin: 2.3rem auto 0 auto;
+  margin: 2.5rem auto 27rem;
   height: 2.8rem;
-  width: 85%;
-  max-width: 550px;
+  width: 100%;
+  max-width: 800px;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 input {
-  width: 70%;
+  width: 100%;
+  height: 2.75rem;
   border: 1px solid #D5D4D8;
-  border-radius: 7px 0px 0px 7px;
+  border-radius: 6px;
   font-size: 1.25rem;
   padding-left: .75rem;
-}
-
-select {
-  background: #F6F6F6;
-  border-width: 1px 1px 1px 0px;
-  border-style: solid;
-  border-color: #D5D4D8;
-  border-radius: 0px;
-  width: 20%;
-  font-size: 1.25rem;
 }
 
 .input-task,
@@ -61,21 +64,24 @@ select {
 }
 
 .service-btn {
-  width: 10%;
+  width: 100%;
+  max-width: 250px;
+  height: 2.75rem;
   background: #3A69D2;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
   border: none;
-  border-radius: 0px 7px 7px 0px;
+  border-radius: 6px;
   transition: .2s ease-in-out;
 }
 
 .service-btn:hover {
-  transform: scale(1.1);
   transition: all .5s ease;
   background-color: rgb(85, 148, 230);
 }
 
 .service-btn:active {
-  transform: scale(1.1);
   transition: all .5s ease;
   cursor: pointer;
 }
@@ -84,12 +90,95 @@ select {
   margin: 0 .5rem;
 }
 
+.rendered-invoice-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.date {
+  margin-top: auto;
+  text-align: left;
+}
+
+.parties-container,
+.middle-invoice-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  text-align: left;
+  border-bottom: 1px solid black;
+  padding-bottom: 1rem;
+  gap: 2rem;
+}
+
+.parties-container {
+  flex-direction: column;
+}
+
+.issued-container>p {
+  margin: 0;
+}
+
+.payable-container>p {
+  margin: 0;
+}
+
+.middle-invoice-container {
+  margin: 0;
+  padding-top: 1rem;
+}
+
+.middle-invoice-container>p {
+  margin: 0;
+}
+
+.item-to-be-rendered {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.item-title {
+  margin: 0;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.remove-btn {
+  border: none;
+  background: #FFFFFF;
+  margin-left: .5rem;
+  color: grey;
+  font-style: italic;
+  padding: 0;
+  transition: .2s ease-in-out;
+}
+
+.remove-btn:hover {
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: 1px solid grey;
+}
+
+.item-hrs {
+  margin-left: auto;
+}
+
+.item-price {
+  margin: 0 0 0 auto;
+  font-size: 1.5rem;
+}
+
 .rendered-items-container {
-  width: 85%;
-  margin: 0 auto;
-  max-width: 550px;
-  border-bottom: 1px solid #C3C6DB;
-  padding-bottom: 2rem;
+  width: 100%;
+  margin: 0 auto ;
+  max-width: 800px;
+  border-bottom: 1px solid black;
+  padding-bottom: 4rem;
 }
 
 .rendered-title-container {
@@ -103,44 +192,12 @@ select {
   margin: 0;
 }
 
-.item-to-be-rendered {
-  display: flex;
-}
-
-.item-title {
-  margin: 0;
-  font-weight: bold;
-  font-size: 1.25rem;
-}
-
-.remove-btn {
-  border: none;
-  background: #FFFFFF;
-  margin-left: .9rem;
-  padding: .5rem 0;
-  color: grey;
-  font-style: italic;
-  transition: .2s ease-in-out;
-}
-
-.remove-btn:hover {
-  color: black;
-  font-size: 15px;
-  cursor: pointer;
-  border-bottom: 2px solid #3770ED;
-}
-
-.item-price {
-  margin: 0 0 0 auto;
-  font-size: 1.5rem;
-}
-
 .rendered-total-container {
   display: flex;
   justify-content: space-between;
-  width: 85%;
+  width: 100%;
   margin: 0 auto;
-  max-width: 550px;
+  max-width: 800px;
   padding-bottom: 2rem;
 }
 
@@ -170,7 +227,6 @@ select {
 }
 
 .get-invoice:hover {
-  transform: scale(1.1);
   transition: all .5s ease;
   cursor: pointer;
   background-color: rgb(85, 148, 230);
@@ -183,4 +239,16 @@ select {
 .totals-container>h2 {
   font-size: 32px;
   margin: 0;
+}
+
+@media screen and (min-width: 450px) {
+
+  .parties-container {
+    flex-direction: row;
+    gap: 0;
+  }
+  .payable-container {
+    margin-left: auto;
+  }
+  
 }
