@@ -3,7 +3,8 @@
 export default function Item(props) {
     return (
         <div className="rendered-invoice-container">
-            <p className="date">date</p>
+            <h2 className="invoice-business-name">M&G Clean Pros LLC</h2>
+            <p className="invoice-small-title">Invoice</p>
             <div className="parties-container">
                 <div className="issued-container">
                     <p>ISSUED TO:</p>

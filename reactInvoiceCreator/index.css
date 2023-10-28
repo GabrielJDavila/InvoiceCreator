@@ -12,21 +12,22 @@ body {
 
 header {
   display: flex;
+  justify-content: center;
   background: #F5F5F5;
   width: 100%;
-  padding: 1.5rem;
-  text-align: left;
+  padding: 1rem;
 }
 
 main {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
 }
 
 .title {
-  margin: 0;
+  margin: 0 auto;
+  text-align: center;
   font-weight: 800;
   color: black;
   font-size: 2.5rem;
@@ -98,7 +99,8 @@ input {
   margin-top: 1rem;
 }
 
-.date {
+.invoice-business-name,
+.invoice-small-title {
   margin-top: auto;
   text-align: left;
 }
@@ -111,11 +113,12 @@ input {
   text-align: left;
   border-bottom: 1px solid black;
   padding-bottom: 1rem;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .parties-container {
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .issued-container>p {

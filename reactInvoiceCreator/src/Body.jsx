@@ -6,6 +6,7 @@ export default function Body() {
     const [inputArr, setInputArr] = useState([])
     const [total, setTotal] = useState(0)
     const [hide, setHide] = useState(false)
+    const [printPage, setPrintPage] = useState(false)
     const [formData, setFormData] = useState({
         service: "",
         price: "",
@@ -13,18 +14,26 @@ export default function Body() {
         issuedToName: "",
         issuedToEmail: "",
         issuedToAddress: "",
-        issuedToPhone: "",
-        payableToName: "M&G Clean Pros LLC",
-        payableToEmail: "mgcleanpros@gmail.com",
-        payableToAddress: "83 S Lasalle St, Apt 1",
-        payableToPhone: "630-864-0607"
-
+        issuedToPhone: ""
     })
     
     useEffect(() => {
         const totalPrice = inputArr.reduce((acc, item) => acc + parseFloat(item.price), 0);
         setTotal(totalPrice);
     }, [inputArr]);
+
+    useEffect(() => {
+        if(printPage) {
+            const timemout = setTimeout(() => {
+                window.print()
+            }, 1000)
+
+            return () => {
+                clearTimeout(timemout)
+            }
+        }
+        setPrintPage(prev => prev === false)
+    }, [printPage])
     
     function handleChange(e) {
         const {name, value} = e.target
@@ -77,21 +86,22 @@ export default function Body() {
         setHide(prev => !prev)
     }
 
-    function print() {
-        window.print()
+    const hideStyles = {
+        display: printPage ? "none" : ""
     }
 
     return (
         <main>
             {!hide &&
             <form onSubmit={handleClick} className="services-container">
+
                 <input
                     type="text"
                     value={formData.service}
                     name="service"
                     onChange={handleChange}
                     className="input-task"
-                    placeholder="Enter Service"
+                    placeholder="enter service"
                     required
                 />
 
@@ -172,7 +182,7 @@ export default function Body() {
             </div>
 
             {!hide && <button className="get-invoice" onClick={changeHide}>Finalize Invoice</button>}
-            {hide && <button className="get-invoice" onClick={print}>Print Invoice</button>}
+            {hide && <button className="get-invoice" onClick={() => setPrintPage(!printPage)} style={hideStyles}>Print Invoice</button>}
         </main>
     )
 }
