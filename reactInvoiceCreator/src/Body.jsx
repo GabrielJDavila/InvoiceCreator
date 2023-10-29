@@ -32,7 +32,7 @@ export default function Body() {
                 clearTimeout(timemout)
             }
         }
-        setPrintPage(prev => prev === false)
+        setPrintPage(false)
     }, [printPage])
     
     function handleChange(e) {
