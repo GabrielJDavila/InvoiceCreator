@@ -4,13 +4,13 @@ export default function Item(props) {
     return (
         <div className="rendered-invoice-container">
             <h2 className="invoice-business-name">M&G Clean Pros LLC</h2>
-            <p className="invoice-small-title">Invoice</p>
             <div className="parties-container">
                 <div className="issued-container">
                     <p>ISSUED TO:</p>
                     <p>{props.issuedName}</p>
                     <p>{props.issuedEmail}</p>
                     <p>{props.issuedAddress}</p>
+                    <p>{props.issuedPhone}</p>
                 </div>
                 <div className="payable-container">
                     <p>PAYABLE TO:</p>

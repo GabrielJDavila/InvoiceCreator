@@ -59,6 +59,7 @@ export default function Body() {
             issuedName={item.issuedToName}
             issuedEmail={item.issuedToEmail}
             issuedAddress={item.issuedToAddress}
+            issuedPhone={item.issuedToPhone}
             removeItem={() => removeItem(index)}
         />
     ));
