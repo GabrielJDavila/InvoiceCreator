@@ -1,9 +1,10 @@
+import { TotalAmount } from "./types"
 
-export default function Total(props) {
+export default function Total(props: TotalAmount) {
     return (
         <div className="totals-container">
             <p>TOTAL AMOUNT</p>
-            <h2>${props.totalAmnt}</h2>
+            <h2>${props.total}</h2>
         </div>
     )
 }

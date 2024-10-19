@@ -1,6 +1,6 @@
+import { Item } from "./types"
 
-
-export default function Item(props) {
+export default function Item(props: Item) {
     return (
         <div className="rendered-invoice-container">
             <h2 className="invoice-business-name">M&G Clean Pros LLC</h2>
@@ -28,7 +28,7 @@ export default function Item(props) {
 
             <div className="item-to-be-rendered">
                 <p className="item-title">{props.service}</p>
-                <button className="remove-btn" onClick={props.removeItem}>remove</button>
+                <button className="remove-btn" onClick={() => props.removeItem(props.key)}>remove</button>
                 <p className="item-hrs">{props.hours}</p>
                 <p className="item-price">${props.price}</p>
             </div>

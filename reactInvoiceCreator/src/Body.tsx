@@ -180,7 +180,7 @@ export default function Body() {
                     <p>We accept cash, credit card, or PayPal</p>
                 </div>
                 <Total
-                    totalAmnt={total}
+                    total={total}
                 />
             </div>
 
