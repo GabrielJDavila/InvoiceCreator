@@ -1,22 +1,22 @@
 import { useState, useEffect } from "react"
 import Item from "./Item"
 import Total from "./Total"
-import { FormState } from "./types"
+import { FormState, Item as ItemType, RenderedInvoiceData } from "./types"
 
 export default function Body() {
 
-    const [inputArr, setInputArr] = useState([])
+    const [inputArr, setInputArr] = useState<ItemType[]>([])
     const [total, setTotal] = useState(0)
     const [hide, setHide] = useState(false)
     const [printPage, setPrintPage] = useState(false)
     const [formData, setFormData] = useState<FormState>({
         service: "",
-        price: 0,
-        hours: 0,
-        issuedToName: "",
-        issuedToEmail: "",
-        issuedToAddress: "",
-        issuedToPhone: ""
+        price: "",
+        hours: "",
+        issuedName: "",
+        issuedEmail: "",
+        issuedAddress: "",
+        issuedPhone: ""
     })
     
     useEffect(() => {
@@ -58,28 +58,40 @@ export default function Body() {
             service={item.service}
             hours={item.hours}
             price={item.price}
-            issuedName={item.issuedToName}
-            issuedEmail={item.issuedToEmail}
-            issuedAddress={item.issuedToAddress}
-            issuedPhone={item.issuedToPhone}
+            issuedName={item.issuedName}
+            issuedEmail={item.issuedEmail}
+            issuedAddress={item.issuedAddress}
+            issuedPhone={item.issuedPhone}
             removeItem={() => removeItem(index)}
         />
     ));
-   
-    function handleClick(e) {
+
+    function handleClick(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        const newObj = formData
+        const newObj: ItemType = {
+            key: Date.now(),
+            service: formData.service,
+            hours: formData.hours,
+            price: formData.price,
+            issuedName: formData.issuedName,
+            issuedEmail: formData.issuedEmail,
+            issuedAddress: formData.issuedAddress,
+            issuedPhone: formData.issuedPhone,
+            removeItem: (index: number) => removeItem(index)
+        }
+
         setInputArr(prevInputArr => [newObj, ...prevInputArr])
+        
         setFormData(prevFormData => {
             return {
                 ...prevFormData,
                 service: "",
                 price: "",
                 hours: "",
-                issuedToName: "",
-                issuedToEmail: "",
-                issuedToAddress: "",
-                issuedToPhone: ""
+                issuedName: "",
+                issuedEmail: "",
+                issuedAddress: "",
+                issuedPhone: ""
             }
         })
         setTotal(prevTotal => prevTotal + parseFloat(formData.price))
@@ -131,7 +143,7 @@ export default function Body() {
                 
                 <input
                     type="text"
-                    value={formData.issuedToName}
+                    value={formData.issuedName}
                     name="issuedToName"
                     onChange={handleChange}
                     className="input-task"
@@ -140,7 +152,7 @@ export default function Body() {
 
                 <input
                     type="text"
-                    value={formData.issuedToEmail}
+                    value={formData.issuedEmail}
                     name="issuedToEmail"
                     onChange={handleChange}
                     className="input-task"
@@ -149,7 +161,7 @@ export default function Body() {
 
                 <input
                     type="text"
-                    value={formData.issuedToAddress}
+                    value={formData.issuedAddress}
                     name="issuedToAddress"
                     onChange={handleChange}
                     className="input-task"
@@ -158,7 +170,7 @@ export default function Body() {
 
                 <input
                     type="text"
-                    value={formData.issuedToPhone}
+                    value={formData.issuedPhone}
                     name="issuedToPhone"
                     onChange={handleChange}
                     className="input-task"

@@ -1,6 +1,6 @@
-import { Item } from "./types"
+import { Item as ItemType } from "./types"
 
-export default function Item(props: Item) {
+export default function Item(props: ItemType) {
     return (
         <div className="rendered-invoice-container">
             <h2 className="invoice-business-name">M&G Clean Pros LLC</h2>
