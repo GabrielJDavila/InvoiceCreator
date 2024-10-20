@@ -1,9 +1,16 @@
 import { Item as ItemType } from "./types"
 
 export default function Item(props: ItemType) {
+
+    const date = new Date()
+    
     return (
         <div className="rendered-invoice-container">
-            <h2 className="invoice-business-name">M&G Clean Pros LLC</h2>
+            <h2 className="invoice-business-name">Invoice</h2>
+            <div className="invoice-num-date-container">
+                <p>{date.toLocaleDateString()}</p>
+                <p></p>
+            </div>
             <div className="parties-container">
                 <div className="issued-container">
                     <p>ISSUED TO:</p>
@@ -32,11 +39,6 @@ export default function Item(props: ItemType) {
                 <p className="item-hrs">{props.hours}</p>
                 <p className="item-price">${props.price}</p>
             </div>
-
-            {/* <div className="invoice-total-container">
-                <p>TOTAL</p>
-                <p>${props.price}</p>
-            </div> */}
 
         </div>
     )

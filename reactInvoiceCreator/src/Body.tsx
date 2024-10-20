@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, ChangeEvent } from "react"
 import Item from "./Item"
 import Total from "./Total"
 import { FormState, Item as ItemType, RenderedInvoiceData } from "./types"
@@ -37,7 +37,7 @@ export default function Body() {
         setPrintPage(false)
     }, [printPage])
     
-    function handleChange(e) {
+    function handleChange(e: ChangeEvent<HTMLInputElement>) {
         const {name, value} = e.target
         setFormData(prevFormData => {
             return {
@@ -79,6 +79,8 @@ export default function Body() {
             issuedPhone: formData.issuedPhone,
             removeItem: (index: number) => removeItem(index)
         }
+
+        console.log(newObj)
 
         setInputArr(prevInputArr => [newObj, ...prevInputArr])
         
@@ -144,7 +146,7 @@ export default function Body() {
                 <input
                     type="text"
                     value={formData.issuedName}
-                    name="issuedToName"
+                    name="issuedName"
                     onChange={handleChange}
                     className="input-task"
                     placeholder="payee name"
@@ -153,7 +155,7 @@ export default function Body() {
                 <input
                     type="text"
                     value={formData.issuedEmail}
-                    name="issuedToEmail"
+                    name="issuedEmail"
                     onChange={handleChange}
                     className="input-task"
                     placeholder="payee email"
@@ -162,7 +164,7 @@ export default function Body() {
                 <input
                     type="text"
                     value={formData.issuedAddress}
-                    name="issuedToAddress"
+                    name="issuedAddress"
                     onChange={handleChange}
                     className="input-task"
                     placeholder="payee address"
@@ -171,7 +173,7 @@ export default function Body() {
                 <input
                     type="text"
                     value={formData.issuedPhone}
-                    name="issuedToPhone"
+                    name="issuedPhone"
                     onChange={handleChange}
                     className="input-task"
                     placeholder="payee phone"
@@ -189,7 +191,7 @@ export default function Body() {
             <div className="rendered-total-container">
                 <div className="rendered-total-title-container">
                     <p>NOTES</p>
-                    <p>We accept cash, credit card, or PayPal</p>
+                    <p>We accept cash, check, Zelle, Venmo, and CashApp</p>
                 </div>
                 <Total
                     total={total}
