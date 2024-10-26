@@ -16,7 +16,8 @@ export default function Body() {
         issuedName: "",
         issuedEmail: "",
         issuedAddress: "",
-        issuedPhone: ""
+        issuedPhone: "",
+        hide: false
     })
     
     useEffect(() => {
@@ -27,6 +28,12 @@ export default function Body() {
     useEffect(() => {
         if(printPage) {
             const timemout = setTimeout(() => {
+                setFormData(prevFormData => {
+                    return {
+                        ...prevFormData,
+                        hide: true,
+                    }
+                })
                 window.print()
             }, 1000)
 
@@ -62,6 +69,7 @@ export default function Body() {
             issuedEmail={item.issuedEmail}
             issuedAddress={item.issuedAddress}
             issuedPhone={item.issuedPhone}
+            hide={item.hide}
             removeItem={() => removeItem(index)}
         />
     ));
@@ -77,6 +85,7 @@ export default function Body() {
             issuedEmail: formData.issuedEmail,
             issuedAddress: formData.issuedAddress,
             issuedPhone: formData.issuedPhone,
+            hide: formData.hide,
             removeItem: (index: number) => removeItem(index)
         }
 
@@ -101,8 +110,14 @@ export default function Body() {
 
     function changeHide() {
         setHide(prev => !prev)
+        setFormData(prevFormData => {
+            return {
+                ...prevFormData,
+                hide: true,
+            }
+        })
     }
-
+    console.log(formData.hide)
     const hideStyles = {
         display: printPage ? "none" : ""
     }

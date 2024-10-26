@@ -5,7 +5,8 @@ export type FormState = {
     issuedName: string,
     issuedEmail: string,
     issuedAddress: string,
-    issuedPhone: string
+    issuedPhone: string,
+    hide: boolean
 }
 
 export type TotalAmount = {
@@ -21,6 +22,7 @@ export type Item = {
     issuedEmail: string,
     issuedAddress: string,
     issuedPhone: string,
+    hide: boolean,
     removeItem: (index: number) => void
 }
 

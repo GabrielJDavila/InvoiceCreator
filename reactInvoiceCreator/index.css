@@ -105,6 +105,10 @@ input {
   text-align: left;
 }
 
+.invoice-num-date-container {
+  margin-right: auto;
+}
+
 .parties-container,
 .middle-invoice-container {
   display: flex;

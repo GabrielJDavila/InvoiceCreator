@@ -1,14 +1,13 @@
 import { Item as ItemType } from "./types"
 
 export default function Item(props: ItemType) {
-
     const date = new Date()
     
     return (
         <div className="rendered-invoice-container">
             <h2 className="invoice-business-name">Invoice</h2>
             <div className="invoice-num-date-container">
-                <p>{date.toLocaleDateString()}</p>
+                <p>Date: {date.toLocaleDateString()}</p>
                 <p></p>
             </div>
             <div className="parties-container">
@@ -35,7 +34,7 @@ export default function Item(props: ItemType) {
 
             <div className="item-to-be-rendered">
                 <p className="item-title">{props.service}</p>
-                <button className="remove-btn" onClick={() => props.removeItem(props.key)}>remove</button>
+                {!props.hide ? <button className="remove-btn" onClick={() => props.removeItem(props.key)}>remove</button> : ""}
                 <p className="item-hrs">{props.hours}</p>
                 <p className="item-price">${props.price}</p>
             </div>
